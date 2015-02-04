@@ -26,6 +26,9 @@
     [navBar setBarTintColor:[UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1]];
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0]}];
 
+    [navBar setTintColor:[UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0]];
+
+
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -14,6 +14,8 @@
 
 @interface MoviesListViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *customSearchBar;
+
 @property (nonatomic,strong) NSArray *movies;
 @end
 
@@ -28,7 +30,8 @@
     self.title = @"Movies";
     
     /* Customize the appearance*/
-
+//    self.customSearchBar.bar = [UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1];
+    
     /* Fetch the data from the rotten tomatoes endpoint */
     NSURL *URL = [NSURL URLWithString:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=5u7cjrjepng6pmz2328rtft8"];
     
@@ -137,18 +140,11 @@
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"SElected");
+
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-/*     *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil]; */
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-//    [self.navigationController pushViewController:detailViewController animated:YES];
-    
+    NSDictionary *movie = self.movies[indexPath.row];
     MovieDetailViewController *mdvc = [[MovieDetailViewController alloc] init];
+    mdvc.movie = movie;
     [self.navigationController pushViewController:mdvc animated:YES];
 }
 

@@ -7,8 +7,9 @@
 //
 
 #import "MovieDetailViewController.h"
-
+#import "UIImageView+AFNetworking.h"
 @interface MovieDetailViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *posterImageView;
 
 @end
 
@@ -16,7 +17,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.title = self.movie[@"title"];
+    NSString *imageUrl = [self.movie valueForKeyPath:@"posters.original"];
+    
+    NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
+    [self.posterImageView setImageWithURL:[NSURL URLWithString: highRes]];
+
 }
 
 - (void)didReceiveMemoryWarning {
