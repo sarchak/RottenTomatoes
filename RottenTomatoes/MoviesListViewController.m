@@ -8,9 +8,12 @@
 
 #import "MoviesListViewController.h"
 #import "MovieTableViewCell.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+
 @interface MoviesListViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic,strong) NSArray *movies;
 @end
 
 @implementation MoviesListViewController
@@ -20,7 +23,26 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerNib: [UINib nibWithNibName:@"MovieTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier: @"MovieCell"];
-    self.tableView.rowHeight = 100;
+    self.tableView.rowHeight = 125;
+    
+    /* Fetch the data from the rotten tomatoes endpoint */
+    NSURL *URL = [NSURL URLWithString:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=5u7cjrjepng6pmz2328rtft8"];
+    
+    // Initialize Request Operation
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:URL]];
+    
+    // Configure Request Operation
+    [requestOperation setResponseSerializer:[AFJSONResponseSerializer serializer]];
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *data = responseObject;
+        self.movies = data[@"movies"];
+        [self.tableView reloadData];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Something failed");
+    }];
+    
+    // Start Request Operation
+    [requestOperation start];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,13 +57,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return [self.movies count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MovieTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MovieCell" forIndexPath:indexPath];
-    cell.titleLabel.text = @"Hello";
+    NSDictionary *movie = self.movies[indexPath.row];
+    cell.titleLabel.text = movie[@"title"];
+    cell.synopsisLabel.text = movie[@"synopsis"];
+    NSString *imageUrl = [movie valueForKeyPath:@"posters.detailed"];
+    [cell.posterImageView setImageWithURL:[NSURL URLWithString: imageUrl]];
+//    cell.backgroundView = cell.posterImageView;
 
     return cell;
 }
