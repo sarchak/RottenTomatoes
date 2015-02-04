@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "MovieDetailViewController.h"
+#import "SVProgressHUD.h"
 
 @interface MoviesListViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -28,6 +29,9 @@
     [self.tableView registerNib: [UINib nibWithNibName:@"MovieTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier: @"MovieCell"];
     self.tableView.rowHeight = 130;
     self.title = @"Movies";
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1]];
+    [SVProgressHUD setForegroundColor: [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0]];
+    [SVProgressHUD show];
     
     /* Customize the appearance*/
 //    self.customSearchBar.bar = [UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1];
@@ -41,9 +45,11 @@
     // Configure Request Operation
     [requestOperation setResponseSerializer:[AFJSONResponseSerializer serializer]];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [SVProgressHUD dismiss];
         NSDictionary *data = responseObject;
         self.movies = data[@"movies"];
         [self.tableView reloadData];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Something failed");
     }];
@@ -67,21 +73,7 @@
     return [self.movies count];
 }
 
-- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
-{
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if ( !error )
-                               {
-                                   UIImage *image = [[UIImage alloc] initWithData:data];
-                                   completionBlock(YES,image);
-                               } else{
-                                   completionBlock(NO,nil);
-                               }
-                           }];
-}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MovieTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MovieCell" forIndexPath:indexPath];
@@ -91,8 +83,10 @@
     NSString *imageUrl = [movie valueForKeyPath:@"posters.original"];
 
     NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
-    [cell.posterImageView setImageWithURL:[NSURL URLWithString: highRes]];
+    
+    [cell.posterImageView setImageWithURL:[NSURL URLWithString: imageUrl]];
 
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }

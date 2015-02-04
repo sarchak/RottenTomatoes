@@ -19,12 +19,19 @@
     [super viewDidLoad];
     self.title = self.movie[@"title"];
     NSString *imageUrl = [self.movie valueForKeyPath:@"posters.original"];
-    
-    NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
-    [self.posterImageView setImageWithURL:[NSURL URLWithString: highRes]];
-
+    [self.posterImageView setImageWithURL:[NSURL URLWithString:imageUrl]];
+     
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    NSString *imageUrl = [self.movie valueForKeyPath:@"posters.original"];
+    NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
+
+    [UIView animateWithDuration:0.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [self.posterImageView setImageWithURL:[NSURL URLWithString: highRes]];
+    } completion:nil];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
