@@ -24,17 +24,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    /* All table view delegate and datasource setup */
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerNib: [UINib nibWithNibName:@"MovieTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier: @"MovieCell"];
     self.tableView.rowHeight = 130;
     self.title = @"Movies";
+    
+    /* Customize the progress bar and setup progress bar*/
     [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1]];
     [SVProgressHUD setForegroundColor: [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0]];
     [SVProgressHUD show];
     
     /* Customize the appearance*/
 //    self.customSearchBar.bar = [UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1];
+    
     
     /* Fetch the data from the rotten tomatoes endpoint */
     NSURL *URL = [NSURL URLWithString:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=5u7cjrjepng6pmz2328rtft8"];
