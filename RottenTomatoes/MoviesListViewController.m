@@ -10,6 +10,7 @@
 #import "MovieTableViewCell.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
+#import "MovieDetailViewController.h"
 
 @interface MoviesListViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -23,8 +24,11 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerNib: [UINib nibWithNibName:@"MovieTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier: @"MovieCell"];
-    self.tableView.rowHeight = 125;
+    self.tableView.rowHeight = 130;
+    self.title = @"Movies";
     
+    /* Customize the appearance*/
+
     /* Fetch the data from the rotten tomatoes endpoint */
     NSURL *URL = [NSURL URLWithString:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=5u7cjrjepng6pmz2328rtft8"];
     
@@ -60,16 +64,33 @@
     return [self.movies count];
 }
 
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MovieTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MovieCell" forIndexPath:indexPath];
     NSDictionary *movie = self.movies[indexPath.row];
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"synopsis"];
-    NSString *imageUrl = [movie valueForKeyPath:@"posters.detailed"];
-    [cell.posterImageView setImageWithURL:[NSURL URLWithString: imageUrl]];
-//    cell.backgroundView = cell.posterImageView;
+    NSString *imageUrl = [movie valueForKeyPath:@"posters.original"];
 
+    NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
+    [cell.posterImageView setImageWithURL:[NSURL URLWithString: highRes]];
+
+    
     return cell;
 }
 
@@ -108,21 +129,29 @@
 }
 */
 
-/*
+-(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"DeSElected");
+}
+
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"SElected");
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     // Navigation logic may go here, for example:
     // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
+/*     *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil]; */
     
     // Pass the selected object to the new view controller.
     
     // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
+//    [self.navigationController pushViewController:detailViewController animated:YES];
+    
+    MovieDetailViewController *mdvc = [[MovieDetailViewController alloc] init];
+    [self.navigationController pushViewController:mdvc animated:YES];
 }
-*/
+
 
 /*
 #pragma mark - Navigation
