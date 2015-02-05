@@ -10,5 +10,5 @@
 #import "MovieTableViewCell.h"
 
 @interface MoviesListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
-
+-(void) fetchData;
 @end

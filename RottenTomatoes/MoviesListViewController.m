@@ -12,12 +12,15 @@
 #import "UIImageView+AFNetworking.h"
 #import "MovieDetailViewController.h"
 #import "SVProgressHUD.h"
+//#import "TSMessage.h"
+//#import "TSMessageView.h"
 
 @interface MoviesListViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *customSearchBar;
 
 @property (nonatomic,strong) NSArray *movies;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation MoviesListViewController
@@ -41,12 +44,28 @@
     /* Customize the appearance*/
 //    self.customSearchBar.bar = [UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1];
     
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(10,0, self.tableView.frame.size.width, 50)];
+//    headerView.backgroundColor = [UIColor greenColor];
+//    [self.view addSubview:headerView];
+    [self fetchData];
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
+}
+
+- (void)refreshTable {
+    NSLog(@"Refresh called calling fetchdata now");
+    [self fetchData];
+}
+
+- (void) fetchData {
     /* Fetch the data from the rotten tomatoes endpoint */
     NSURL *URL = [NSURL URLWithString:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=5u7cjrjepng6pmz2328rtft8"];
     
     // Initialize Request Operation
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:URL]];
+    
     
     // Configure Request Operation
     [requestOperation setResponseSerializer:[AFJSONResponseSerializer serializer]];
@@ -55,15 +74,14 @@
         NSDictionary *data = responseObject;
         self.movies = data[@"movies"];
         [self.tableView reloadData];
-        
+        [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Something failed");
+        
     }];
     
     // Start Request Operation
     [requestOperation start];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

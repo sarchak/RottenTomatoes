@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MovieDetailViewController : UIViewController
+@interface MovieDetailViewController : UIViewController  <UIScrollViewDelegate>
 @property (nonatomic,strong) NSDictionary *movie;
 @end
