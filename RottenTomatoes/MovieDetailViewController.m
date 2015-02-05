@@ -40,17 +40,19 @@
 
     
     /* Adding extra 50 for some gap when we scroll to the end of the screen */
-//    int totalHeight = self.movieLabel.frame.size.height +  self.movieDetailLabel.frame.size.height + self.movieRatingsLabel.frame.size.height + self.textScrollView.contentSize.height;
+    int totalHeight = self.movieLabel.frame.size.height +  self.movieDetailLabel.frame.size.height + self.movieRatingsLabel.frame.size.height + 250;
+
+//    totalHeight += self.view.frame.size.height ;
+
+    
+//    CGRect tmpFrame = self.backgroundView.frame;
+//    tmpFrame.size.height =tmpFrame.size.height + totalHeight + 250;
+//    self.backgroundView.frame = tmpFrame;
+//    
+//    [self.backgroundView sizeToFit];
 //
-    int totalHeight = self.view.frame.size.height;
-
-
     self.textScrollView.contentSize = CGSizeMake(self.view.frame.size.width, totalHeight + 250);
     self.textScrollView.delegate = self;
-
-    CGRect tmpFrame = self.backgroundView.frame;
-    tmpFrame.size.height = totalHeight;
-    self.backgroundView.frame = tmpFrame;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
