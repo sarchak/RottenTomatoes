@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieLabel;
 @property (weak, nonatomic) IBOutlet UILabel *movieDetailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *movieRatingsLabel;
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
 
 @end
 
@@ -39,11 +40,17 @@
 
     
     /* Adding extra 50 for some gap when we scroll to the end of the screen */
-    int totalHeight = self.movieLabel.frame.size.width +  self.movieDetailLabel.frame.size.width + self.movieRatingsLabel.frame.size.width;
-    self.textScrollView.contentSize = CGSizeMake(self.view.frame.size.width, totalHeight);
+//    int totalHeight = self.movieLabel.frame.size.height +  self.movieDetailLabel.frame.size.height + self.movieRatingsLabel.frame.size.height + self.textScrollView.contentSize.height;
+//
+    int totalHeight = self.view.frame.size.height;
+
+
+    self.textScrollView.contentSize = CGSizeMake(self.view.frame.size.width, totalHeight + 250);
     self.textScrollView.delegate = self;
-    
-    
+
+    CGRect tmpFrame = self.backgroundView.frame;
+    tmpFrame.size.height = totalHeight;
+    self.backgroundView.frame = tmpFrame;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -65,17 +72,13 @@
 -(void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
 
     [self.textScrollView setScrollsToTop:YES];
-//    scrollView.frame = CGRectMake(0, self.view.frame.size.height/2, self.view.frame.size.width, self.view.frame.size.height/2);
+//    scrollView.frame = CGRectMake(0, self.view.frame.size.height - self.textScrollView.contentSize.height, self.view.frame.size.width, self.textScrollView.contentSize.height);
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView {
 
     
     //NSLog(@"Started scrolling");
-//    NSLog(@"In scrollview %@", NSStringFromCGPoint(scrollView.contentOffset));
-//    if(scrollView.contentOffset.y > 300){
-//      scrollView.frame = CGRectMake(0, self.view.frame.size.height/2, self.view.frame.size.width, self.view.frame.size.height* 0.75);
-//    }
 
 }
 

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "MovieTableViewCell.h"
 
-@interface MoviesListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MoviesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 -(void) fetchData;
 @end

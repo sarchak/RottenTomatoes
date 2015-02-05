@@ -12,8 +12,6 @@
 #import "UIImageView+AFNetworking.h"
 #import "MovieDetailViewController.h"
 #import "SVProgressHUD.h"
-//#import "TSMessage.h"
-//#import "TSMessageView.h"
 
 @interface MoviesListViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -106,8 +104,6 @@
     cell.synopsisLabel.text = movie[@"synopsis"];
     NSString *imageUrl = [movie valueForKeyPath:@"posters.original"];
 
-    NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
-    
     [cell.posterImageView setImageWithURL:[NSURL URLWithString: imageUrl]];
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
