@@ -26,7 +26,7 @@
                 <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
                 <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
             </connections>
-            <point key="canvasLocation" x="305" y="373"/>
+            <point key="canvasLocation" x="303" y="451"/>
         </tableView>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

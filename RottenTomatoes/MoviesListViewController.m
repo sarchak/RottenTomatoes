@@ -16,8 +16,9 @@
 @interface MoviesListViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *customSearchBar;
-@property (strong, nonatomic) UIView *errorView;
 
+@property (strong, nonatomic) UIView *errorView;
+@property (strong, nonatomic) UISegmentedControl *segmentedControl;
 @property (nonatomic,strong) NSArray *movies;
 @property (nonatomic,strong) NSMutableArray *filteredMovies;
 @property BOOL active;
@@ -52,10 +53,22 @@
     self.customSearchBar.delegate = self;
     self.customSearchBar.showsCancelButton = YES;
     self.customSearchBar.tintColor = [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0];
+    
+//    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"All", @"Not on this iPhone", nil]];
+//    self.segmentedControl.selectedSegmentIndex = 0;
+//    [self.segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+//    self.segmentedControl.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
+//    [self.view addSubview:self.segmentedControl];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    self.active = NO;
+}
+-(void) viewWillDisappear:(BOOL)animated {
+    self.active = NO;
 }
 
 - (void)refreshTable {
-    NSLog(@"Refresh called calling fetchdata now");
     [self fetchData];
 }
 
@@ -150,12 +163,12 @@
 #pragma mark - Search Functionality
 
 -(void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    self.active = YES;
+
 }
 -(void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     self.active = YES;
     if([searchText isEqual:@""]){
-        self.active = false;
+        self.active = NO;
         [self.tableView reloadData];
     }
     [self searchFunc:searchText];
