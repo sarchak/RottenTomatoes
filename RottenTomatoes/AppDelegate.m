@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "MoviesListViewController.h"
+#import "CollectionViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -20,13 +22,35 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MoviesListViewController *vc = [[MoviesListViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController= nvc;
+
+
+
+    CollectionViewController *cvc = [[CollectionViewController alloc] init];
+    UINavigationController *ncvc = [[UINavigationController alloc] initWithRootViewController:cvc];
+    UITabBarController *tbc = [[UITabBarController alloc] init];
+    [tbc setViewControllers:@[nvc,ncvc]];
+
+
+    NSArray *items = tbc.tabBar.items;
+    
+    UITabBarItem *movies = [items objectAtIndex:0];
+    UITabBarItem *dvds = [items objectAtIndex:1];
+    [movies initWithTitle:@"Movies" image:[UIImage imageNamed:@"Movies"] selectedImage: [UIImage imageNamed:@"Movies"]];
+    
+    [dvds initWithTitle:@"DVDs" image:[UIImage imageNamed:@"DVDs"] selectedImage: [UIImage imageNamed:@"DVDs"]];
+    
+    self.window.rootViewController= tbc;
     
     UINavigationBar *navBar = [UINavigationBar appearance];
     [navBar setBarTintColor:[UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1]];
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0]}];
 
     [navBar setTintColor:[UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0]];
+
+    UITabBar *tabBar = [UITabBar appearance];
+    [tabBar setBarTintColor:[UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1]];
+    
+    [tabBar setTintColor:[UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0]];
 
 
     [self.window makeKeyAndVisible];

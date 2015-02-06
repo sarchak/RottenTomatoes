@@ -16,6 +16,7 @@
 @interface MoviesListViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *customSearchBar;
+@property (strong, nonatomic) UIView *errorView;
 
 @property (nonatomic,strong) NSArray *movies;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -50,6 +51,7 @@
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
+  
 }
 
 - (void)refreshTable {
@@ -69,17 +71,28 @@
     [requestOperation setResponseSerializer:[AFJSONResponseSerializer serializer]];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
+        [self.errorView removeFromSuperview];
         NSDictionary *data = responseObject;
         self.movies = data[@"movies"];
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+        self.errorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+        self.errorView.backgroundColor = [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0];
+        UILabel *errorMsg = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+        
+        errorMsg.text = @"Network error. Please try later!";
+        errorMsg.textAlignment = NSTextAlignmentCenter;
+        [self.errorView addSubview:errorMsg];
+        [self.view addSubview:self.errorView];
+
         
     }];
-    
-    // Start Request Operation
     [requestOperation start];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
