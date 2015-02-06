@@ -19,6 +19,8 @@
 @property (strong, nonatomic) UIView *errorView;
 
 @property (nonatomic,strong) NSArray *movies;
+@property (nonatomic,strong) NSMutableArray *filteredMovies;
+@property BOOL active;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
@@ -27,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
     /* All table view delegate and datasource setup */
     
     self.tableView.delegate = self;
@@ -40,18 +43,15 @@
     [SVProgressHUD setForegroundColor: [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0]];
     [SVProgressHUD show];
     
-    /* Customize the appearance*/
-//    self.customSearchBar.bar = [UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1];
-    
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(10,0, self.tableView.frame.size.width, 50)];
-//    headerView.backgroundColor = [UIColor greenColor];
-//    [self.view addSubview:headerView];
     [self fetchData];
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
-    
-  
+
+    self.customSearchBar.placeholder = @"Search";
+    self.customSearchBar.delegate = self;
+    self.customSearchBar.showsCancelButton = YES;
+    self.customSearchBar.tintColor = [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0];
 }
 
 - (void)refreshTable {
@@ -93,6 +93,8 @@
     [requestOperation start];
 }
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -105,7 +107,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.movies count];
+
+    if(self.active) {
+        return [self.filteredMovies count];
+    } else {
+        return [self.movies count];
+    }
+
 }
 
 
@@ -113,6 +121,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MovieTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MovieCell" forIndexPath:indexPath];
     NSDictionary *movie = self.movies[indexPath.row];
+    if(self.active) {
+        movie = self.filteredMovies[indexPath.row];
+    }
+    
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"synopsis"];
     NSString *imageUrl = [movie valueForKeyPath:@"posters.original"];
@@ -125,6 +137,7 @@
 }
 
 
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -133,34 +146,44 @@
 }
 */
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+#pragma mark - Search Functionality
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+-(void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.active = YES;
 }
-*/
+-(void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    self.active = YES;
+    if([searchText isEqual:@""]){
+        self.active = false;
+        [self.tableView reloadData];
+    }
+    [self searchFunc:searchText];
+    
+}
 
--(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"DeSElected");
+
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.active = FALSE;
+    self.customSearchBar.text = nil;
+    self.customSearchBar.placeholder = @"Search";
+    [self.customSearchBar resignFirstResponder];
+}
+
+-(void) searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+    self.active = false;
+    self.customSearchBar.text = nil;
+    [self.tableView reloadData];
+}
+-(void) searchFunc: (NSString*) searchText {
+    self.filteredMovies = [[NSMutableArray alloc] init];
+    for (int i = 0; i < self.movies.count; i++) {
+
+        if([self.movies[i][@"title"] containsString:searchText]) {
+            [self.filteredMovies addObject:self.movies[i]];
+        }
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view delegate
@@ -170,6 +193,9 @@
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *movie = self.movies[indexPath.row];
+    if(self.active) {
+        movie = self.filteredMovies[indexPath.row];
+    }
     MovieDetailViewController *mdvc = [[MovieDetailViewController alloc] init];
     mdvc.movie = movie;
     [self.navigationController pushViewController:mdvc animated:YES];
