@@ -11,6 +11,8 @@
 		564D9F551A82055D004B0FD3 /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 564D9F531A82055D004B0FD3 /* MovieDetailViewController.m */; };
 		564D9F561A82055D004B0FD3 /* MovieDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564D9F541A82055D004B0FD3 /* MovieDetailViewController.xib */; };
 		5658661F1A81CF6100DECF6D /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5658661E1A81CF6100DECF6D /* image.jpg */; };
+		56CC5C281A85B4C9001E73A1 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56CC5C261A85B4C8001E73A1 /* ParentViewController.m */; };
+		56CC5C291A85B4C9001E73A1 /* ParentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CC5C271A85B4C8001E73A1 /* ParentViewController.xib */; };
 		56CE13A31A80A3D8002F2ED1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 56CE13A21A80A3D8002F2ED1 /* main.m */; };
 		56CE13A61A80A3D8002F2ED1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 56CE13A51A80A3D8002F2ED1 /* AppDelegate.m */; };
 		56CE13AE1A80A3D8002F2ED1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56CE13AD1A80A3D8002F2ED1 /* Images.xcassets */; };
@@ -45,6 +47,9 @@
 		564D9F531A82055D004B0FD3 /* MovieDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetailViewController.m; sourceTree = "<group>"; };
 		564D9F541A82055D004B0FD3 /* MovieDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieDetailViewController.xib; sourceTree = "<group>"; };
 		5658661E1A81CF6100DECF6D /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		56CC5C251A85B4C8001E73A1 /* ParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentViewController.h; sourceTree = "<group>"; };
+		56CC5C261A85B4C8001E73A1 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
+		56CC5C271A85B4C8001E73A1 /* ParentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParentViewController.xib; sourceTree = "<group>"; };
 		56CE139D1A80A3D8002F2ED1 /* RottenTomatoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RottenTomatoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56CE13A11A80A3D8002F2ED1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56CE13A21A80A3D8002F2ED1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -170,6 +175,9 @@
 				56FDFB991A847880003F077F /* CollectionViewController.h */,
 				56FDFB9A1A847880003F077F /* CollectionViewController.m */,
 				56FDFB9B1A847880003F077F /* CollectionViewController.xib */,
+				56CC5C251A85B4C8001E73A1 /* ParentViewController.h */,
+				56CC5C261A85B4C8001E73A1 /* ParentViewController.m */,
+				56CC5C271A85B4C8001E73A1 /* ParentViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -274,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				564D9F561A82055D004B0FD3 /* MovieDetailViewController.xib in Resources */,
+				56CC5C291A85B4C9001E73A1 /* ParentViewController.xib in Resources */,
 				56CE13B11A80A3D8002F2ED1 /* LaunchScreen.xib in Resources */,
 				56FDFB9D1A847880003F077F /* CollectionViewController.xib in Resources */,
 				56CE13AE1A80A3D8002F2ED1 /* Images.xcassets in Resources */,
@@ -339,6 +348,7 @@
 				56CE13D21A80A867002F2ED1 /* MovieTableViewCell.m in Sources */,
 				56FDFBA61A848FD3003F077F /* CollectionViewCell.m in Sources */,
 				56CE13C91A80A4D4002F2ED1 /* MoviesListViewController.m in Sources */,
+				56CC5C281A85B4C9001E73A1 /* ParentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

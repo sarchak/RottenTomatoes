@@ -140,6 +140,11 @@
     
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"synopsis"];
+    cell.mpaRatings.text = [NSString stringWithFormat:@" %@ ", movie[@"mpaa_rating"]];
+    cell.mpaRatings.layer.borderWidth = 1.0;
+    cell.mpaRatings.layer.borderColor = [[UIColor colorWithRed:170.0/255 green:170.0/255 blue:170.0/255 alpha:1] CGColor];
+    cell.mpaRatings.layer.cornerRadius = 2.0;
+    [cell.mpaRatings sizeToFit];
     NSString *imageUrl = [movie valueForKeyPath:@"posters.original"];
 
     [cell.posterImageView setImageWithURL:[NSURL URLWithString: imageUrl]];

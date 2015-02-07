@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MoviesListViewController.h"
 #import "CollectionViewController.h"
+#import "ParentViewController.h"
 
 @interface AppDelegate ()
 
@@ -25,11 +26,14 @@
 
 
 
+    /* Main controller */
     CollectionViewController *cvc = [[CollectionViewController alloc] init];
     UINavigationController *ncvc = [[UINavigationController alloc] initWithRootViewController:cvc];
+    ParentViewController *pvc = [[ParentViewController alloc] init];
+    UINavigationController *npvc = [[UINavigationController alloc] initWithRootViewController:pvc];
     UITabBarController *tbc = [[UITabBarController alloc] init];
     [tbc setViewControllers:@[nvc,ncvc]];
-
+//    [tbc setViewControllers:@[nvc,npvc]];
 
     NSArray *items = tbc.tabBar.items;
     

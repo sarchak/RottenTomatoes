@@ -21,20 +21,28 @@
                         <rect key="frame" x="143" y="8" width="220" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                        <color key="textColor" red="1" green="0.80896733730000003" blue="0.43951479799999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="1" green="0.89121899243659963" blue="0.55176754304434983" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uba-G0-4ex">
-                        <rect key="frame" x="143" y="46" width="236" height="57"/>
+                        <rect key="frame" x="143" y="65" width="236" height="57"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                         <color key="textColor" red="0.91440330339999998" green="0.93016065309999996" blue="0.94787533069999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PBP-et-hNM">
+                        <rect key="frame" x="143" y="36" width="50" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" red="0.029536603773854708" green="0.03874212581853595" blue="0.058387070105820116" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
             <connections>
+                <outlet property="mpaRatings" destination="PBP-et-hNM" id="Bt7-aR-DS0"/>
                 <outlet property="posterImageView" destination="p0j-fc-SmI" id="NOf-na-NPA"/>
                 <outlet property="synopsisLabel" destination="uba-G0-4ex" id="7BK-zD-48M"/>
                 <outlet property="titleLabel" destination="IdR-Cj-1fn" id="uRv-pt-WWo"/>
