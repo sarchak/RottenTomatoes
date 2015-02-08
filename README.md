@@ -22,10 +22,12 @@ Time spent: 12hr
    * Customize the highlight and selection effect of the cell. (**Completed**)
    * Customize the navigation bar. (**Completed**)
 
-Walkthrough
+#####Walkthrough
 
 ![Video Walkthrough](Rotten_Tomatoes.gif)
 
-Credits
-Rotten Tomatoes API
-AFNetworking
+#####Credits
+   * [Rotten Tomatoes API](http://developer.rottentomatoes.com/)
+   * [AFNetworking](https://github.com/AFNetworking/AFNetworking)
+   * [SVProgressHUD](http://samvermette.com/199)
+   * [iconfinder](https://www.iconfinder.com/)
