@@ -136,20 +136,25 @@
     CollectionViewCell *cell = [self.dvdsCollectionView dequeueReusableCellWithReuseIdentifier: @"DVDCell" forIndexPath:indexPath];
     NSDictionary *movie = self.movies[indexPath.row];
     cell.posterImageView.image = nil;
+    cell.loadingView.hidden = NO;
+    [cell.loadingView startAnimating];
+    cell.posterImageView.image = nil;
+    
     cell.movieTitle.text = movie[@"title"];
     cell.timeLabel.text = [NSString stringWithFormat:@"Runtime : %@min",  movie[@"runtime"]];
     cell.ratingsLabel.text = movie[@"mpaa_rating"];
     NSString *imageUrl = [movie valueForKeyPath:@"posters.thumbnail"];
     NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
-    [cell.posterImageView setImageWithURL:[NSURL URLWithString: highRes]];
-//    [cell.posterImageView setImageWithURL:[NSURL URLWithString: highRes]];
-//    cell.movieTitle.numberOfLines = 0;
-//    cell.ratingsLabel.numberOfLines = 0;
-//    cell.timeLabel.numberOfLines = 0;
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:highRes]];
+    [cell.posterImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [cell.loadingView stopAnimating];
+        cell.loadingView.hidden = YES;
+        cell.posterImageView.image = image;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        [cell.loadingView stopAnimating];
+        cell.loadingView.hidden = YES;
+    }];
     
-//    [cell.movieTitle sizeToFit];
-//    [cell.timeLabel sizeToFit];
-//    [cell.ratingsLabel sizeToFit];
     cell.layer.borderWidth = 1.0;
     cell.layer.borderColor = [[UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:0.5] CGColor];
     return cell;
@@ -157,11 +162,11 @@
 
 -(CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    return CGSizeMake(160, 225);
+    return CGSizeMake(170, 225);
 }
 
 -(UIEdgeInsets) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(10, 20, 10, 20);
+    return UIEdgeInsetsMake(5, 10, 5, 10);
 
 }
 
@@ -182,7 +187,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MovieTableViewCell *cell = [self.dvdsListView dequeueReusableCellWithIdentifier:@"MovieCell" forIndexPath:indexPath];
     NSDictionary *movie = self.movies[indexPath.row];
-    
+    cell.loadingView.hidden = NO;
+    [cell.loadingView startAnimating];
+    cell.posterImageView.image = nil;    
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"synopsis"];
     cell.mpaRatings.text = [NSString stringWithFormat:@" %@ ", movie[@"mpaa_rating"]];
@@ -192,9 +199,17 @@
     [cell.mpaRatings sizeToFit];
 
     NSString *imageUrl = [movie valueForKeyPath:@"posters.original"];
-    
-    [cell.posterImageView setImageWithURL:[NSURL URLWithString: imageUrl]];
-    
+    NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:highRes]];
+    [cell.posterImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [cell.loadingView stopAnimating];
+        cell.loadingView.hidden = YES;
+        cell.posterImageView.image = image;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        [cell.loadingView stopAnimating];
+        cell.loadingView.hidden = YES;
+    }];
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

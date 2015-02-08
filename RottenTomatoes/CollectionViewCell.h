@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieTitle;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ratingsLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingView;
 
 @end

@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="162" height="223"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsG-77-h7j">
-                        <rect key="frame" x="8" y="169" width="146" height="21"/>
+                        <rect key="frame" x="8" y="174" width="146" height="21"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -30,15 +30,20 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EKE-BM-vhr">
-                        <rect key="frame" x="16" y="16" width="131" height="144"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EKE-BM-vhr">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="171"/>
                     </imageView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6j1-w7-sAJ">
+                        <rect key="frame" x="71" y="75" width="20" height="20"/>
+                        <color key="color" red="1" green="0.80896733730000003" blue="0.43951479799999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="0.029536603769999999" green="0.038742125820000001" blue="0.058387070110000001" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="162" height="223"/>
             <connections>
+                <outlet property="loadingView" destination="6j1-w7-sAJ" id="61S-FG-yO7"/>
                 <outlet property="movieTitle" destination="nsG-77-h7j" id="D6B-a5-9YC"/>
                 <outlet property="posterImageView" destination="EKE-BM-vhr" id="Afm-MY-8Fs"/>
                 <outlet property="ratingsLabel" destination="5CQ-HF-jqM" id="D2P-tk-enT"/>
