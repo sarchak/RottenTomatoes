@@ -54,6 +54,8 @@
     self.customSearchBar.showsCancelButton = YES;
     self.customSearchBar.tintColor = [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0];
     
+    self.navigationController.hidesBarsOnSwipe = YES;
+    self.navigationController.hidesBarsOnTap = YES;
 //    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"All", @"Not on this iPhone", nil]];
 //    self.segmentedControl.selectedSegmentIndex = 0;
 //    [self.segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];

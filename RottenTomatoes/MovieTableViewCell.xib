@@ -20,7 +20,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IdR-Cj-1fn">
                         <rect key="frame" x="143" y="8" width="220" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="20"/>
                         <color key="textColor" red="1" green="0.89121899243659963" blue="0.55176754304434983" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>

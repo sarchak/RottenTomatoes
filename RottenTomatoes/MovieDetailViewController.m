@@ -8,6 +8,8 @@
 
 #import "MovieDetailViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "FXBlurView.h"
+
 @interface MovieDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *posterImageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *textScrollView;
@@ -77,22 +79,4 @@
 //    scrollView.frame = CGRectMake(0, self.view.frame.size.height - self.textScrollView.contentSize.height, self.view.frame.size.width, self.textScrollView.contentSize.height);
 }
 
--(void) scrollViewDidScroll:(UIScrollView *)scrollView {
-
-    
-    //NSLog(@"Started scrolling");
-
-}
-
--(void) scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    NSLog(@"In scrollview %@", NSStringFromCGPoint(scrollView.contentOffset));
-}
-
--(void) scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    //NSLog(@"Will begin decelerating");
-}
-
--(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    //NSLog(@"Will end decelerating");
-}
 @end

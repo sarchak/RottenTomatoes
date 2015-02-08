@@ -61,6 +61,9 @@
     [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:8.0/255 green:10.0/255 blue:15.0/255 alpha:1]];
     [SVProgressHUD setForegroundColor: [UIColor colorWithRed:1.0 green:206.0/255 blue:112.0/255 alpha:1.0]];
     [SVProgressHUD show];
+    
+//    self.navigationController.hidesBarsOnSwipe = YES;
+//    self.navigationController.hidesBarsOnTap = YES;
 
 }
 
