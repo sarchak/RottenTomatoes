@@ -139,7 +139,9 @@
     if(self.active) {
         movie = self.filteredMovies[indexPath.row];
     }
-    
+    cell.loadingView.hidden = NO;
+    [cell.loadingView startAnimating];
+    cell.posterImageView.image = nil;
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"synopsis"];
     cell.mpaRatings.text = [NSString stringWithFormat:@" %@ ", movie[@"mpaa_rating"]];
@@ -148,9 +150,16 @@
     cell.mpaRatings.layer.cornerRadius = 2.0;
     [cell.mpaRatings sizeToFit];
     NSString *imageUrl = [movie valueForKeyPath:@"posters.original"];
-
-    [cell.posterImageView setImageWithURL:[NSURL URLWithString: imageUrl]];
-
+    NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:highRes]];
+    [cell.posterImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [cell.loadingView stopAnimating];
+        cell.loadingView.hidden = YES;
+        cell.posterImageView.image = image;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+         [cell.loadingView stopAnimating];
+        cell.loadingView.hidden = YES;
+    }];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;

@@ -135,12 +135,13 @@
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CollectionViewCell *cell = [self.dvdsCollectionView dequeueReusableCellWithReuseIdentifier: @"DVDCell" forIndexPath:indexPath];
     NSDictionary *movie = self.movies[indexPath.row];
+    cell.posterImageView.image = nil;
     cell.movieTitle.text = movie[@"title"];
     cell.timeLabel.text = [NSString stringWithFormat:@"Runtime : %@min",  movie[@"runtime"]];
     cell.ratingsLabel.text = movie[@"mpaa_rating"];
     NSString *imageUrl = [movie valueForKeyPath:@"posters.thumbnail"];
     NSString *highRes = [imageUrl stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
-    [cell.posterImageView setImageWithURL:[NSURL URLWithString: imageUrl]];
+    [cell.posterImageView setImageWithURL:[NSURL URLWithString: highRes]];
 //    [cell.posterImageView setImageWithURL:[NSURL URLWithString: highRes]];
 //    cell.movieTitle.numberOfLines = 0;
 //    cell.ratingsLabel.numberOfLines = 0;

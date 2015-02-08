@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *posterImageView;
 @property (weak, nonatomic) IBOutlet UILabel *mpaRatings;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingView;
 @end

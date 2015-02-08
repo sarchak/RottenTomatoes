@@ -38,10 +38,16 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" id="D4O-ML-8dy">
+                        <rect key="frame" x="57" y="55" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="color" red="1" green="0.80896733730000003" blue="0.43951479799999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" red="0.029536603773854708" green="0.03874212581853595" blue="0.058387070105820116" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
             <connections>
+                <outlet property="loadingView" destination="D4O-ML-8dy" id="vC8-tH-dRw"/>
                 <outlet property="mpaRatings" destination="PBP-et-hNM" id="Bt7-aR-DS0"/>
                 <outlet property="posterImageView" destination="p0j-fc-SmI" id="NOf-na-NPA"/>
                 <outlet property="synopsisLabel" destination="uba-G0-4ex" id="7BK-zD-48M"/>
