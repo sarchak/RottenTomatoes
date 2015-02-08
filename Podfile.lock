@@ -1,0 +1,45 @@
+PODS:
+  - AFNetworking (2.5.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.5.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.0)
+  - AFNetworking/Security (2.5.0)
+  - AFNetworking/Serialization (2.5.0)
+  - AFNetworking/UIKit (2.5.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - FXBlurView (1.6.3)
+  - HexColors (2.2.1)
+  - JFMinimalNotifications (0.0.2)
+  - SVProgressHUD (1.1.2)
+  - TSMessages (0.9.12):
+    - HexColors
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5)
+  - FXBlurView (~> 1.6)
+  - JFMinimalNotifications (~> 0.0.2)
+  - SVProgressHUD (~> 1.1)
+  - TSMessages
+
+SPEC CHECKSUMS:
+  AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
+  FXBlurView: abe1046285813c4f6e9008abbc324fc5ab32af90
+  HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
+  JFMinimalNotifications: 8d8953b7c64a9def469abbd6ba051b47ff53946e
+  SVProgressHUD: da7a49e789af645d9279ffbca62318945a832438
+  TSMessages: b2b5dc71f65146387e51f2600bb0eb8f3a6c4ab8
+
+COCOAPODS: 0.34.4

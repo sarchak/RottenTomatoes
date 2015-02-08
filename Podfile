@@ -1,0 +1,5 @@
+pod 'FXBlurView', '~> 1.6'
+pod 'SVProgressHUD', '~> 1.1'
+pod 'JFMinimalNotifications', '~> 0.0.2'
+pod 'TSMessages'
+pod 'AFNetworking', '~> 2.5'
