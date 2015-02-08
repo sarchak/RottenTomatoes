@@ -26,6 +26,9 @@ Time spent: 12hr
 
 ![Video Walkthrough](Rotten_Tomatoes.gif)
 
+If we use the high res version of the image in tableview , we wont be able to provide the low res version followed by high res version in the detailed view controller since its already cached. If we are ok with that then we can use an activiyindicatorview while loading the highres image in the tableview.
+
+![Video Walkthrough](Rotten_Tomatoes_1.gif)
 #####Credits
    * [Rotten Tomatoes API](http://developer.rottentomatoes.com/)
    * [AFNetworking](https://github.com/AFNetworking/AFNetworking)
